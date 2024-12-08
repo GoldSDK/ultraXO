@@ -6,10 +6,6 @@
 #include <sstream>
 #include <vector>
 
-//Функция позволяющая пользователю выбрать одну опцию (число) из нескольких с защийтой от дурака
-//Исспользуется как-то так:
-//int userChoise - переменная хранящая выбор пользователя
-//userChoise = chooseOption(количество_опций, "Выберите опцию:\n1 - опция1\n2 - опция2...", "текст_ошибки_при_вводе_не_числа", "текст_ошибки_при_вводе_числа_вне_диапазона");
 int chooseOption(int optionsAmount, std::string message, std::string error1, std::string error2) {
 	int ans;
 	bool err;
