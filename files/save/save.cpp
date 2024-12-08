@@ -1,11 +1,11 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <iomanip>
 #include <ctime>
 #include <fstream>
 #include <string>
 #include <sstream>
 #include <vector>
-//Тест
+//РўРµСЃС‚
 int chooseOption(int optionsAmount, std::string message, std::string error1, std::string error2) {
 	int ans;
 	bool err;
