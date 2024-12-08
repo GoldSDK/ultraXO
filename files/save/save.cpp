@@ -195,3 +195,26 @@ void checkAccount(int mode) {
 		setActivity(name, mode);
 	}
 }
+
+// Эта функця прибавляет побуды основного игрока и прибавляет поражения второго (вызывается если первый победил)
+void winPoint() {
+	std::vector<Account> accounts;
+	importAccounts(accounts);
+	for (auto& account : accounts)
+	{
+		if (account.active == 1) account.wins++;
+		if (account.active == 2) account.loses++;
+	}
+	saveAccounts(accounts);
+}
+// А эта наоборот
+void losePoint() {
+	std::vector<Account> accounts;
+	importAccounts(accounts);
+	for (auto& account : accounts)
+	{
+		if (account.active == 1) account.loses++;
+		if (account.active == 2) account.wins++;
+	}
+	saveAccounts(accounts);
+}
