@@ -119,3 +119,16 @@ bool accountExists(std::string userName) {
 		if (account.name == userName) return true;
 	return false;
 }
+
+void setActivity(std::string userName, int mode) {
+	std::vector<Account> accounts;
+	importAccounts(accounts);
+	for (auto& account : accounts)
+		if (account.name == userName)
+		{
+			account.active = mode;
+			break;
+		}
+	saveAccounts(accounts);
+}
+
