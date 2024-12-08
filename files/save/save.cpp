@@ -5,7 +5,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
-
+//Тест
 int chooseOption(int optionsAmount, std::string message, std::string error1, std::string error2) {
 	int ans;
 	bool err;
