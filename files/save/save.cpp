@@ -63,19 +63,19 @@ std::string myReplace(std::string original, std::string repWhat, std::string rep
 
 struct Account
 {
-	int id;
 	std::string name;
 	int wins;
 	int loses;
+	int active;
 };
 
 void importAccounts(std::vector<Account>& accounts) {
 	int err = 0;
 	std::string line;
-	int id;
 	std::string name;
 	int wins;
 	int loses;
+	int active;
 	Account tmpAccount;
 
 	std::ifstream importFrom("account.txt");
@@ -90,13 +90,13 @@ void importAccounts(std::vector<Account>& accounts) {
 		if (line != "")
 		{
 			std::istringstream sLine(line);
-			sLine >> id >> name >> wins >> loses;
+			sLine >> name >> wins >> loses >> active;
 			if (!std::cin.fail());
 			{
-				tmpAccount.id = id;
-				tmpAccount.name = myReplace(name, "|", " ");
+				tmpAccount.name = segment(myReplace(name, "|", " "), 0, name.size() - 1);
 				tmpAccount.wins = wins;
 				tmpAccount.loses = loses;
+				tmpAccount.active = active;
 				accounts.push_back(tmpAccount);
 			}
 		}
@@ -107,7 +107,7 @@ void importAccounts(std::vector<Account>& accounts) {
 void saveAccounts(std::vector<Account>& accounts) {
 	std::ofstream saveTo("account.txt");
 	for (auto account : accounts) {
-		saveTo << account.id << " " << myReplace(account.name, " ", "|") << " " << account.wins << " " << account.loses << "\n";
+		saveTo << myReplace(account.name, " ", "|") << " " << account.wins << " " << account.loses << " " << account.active << "\n";
 	}
 	saveTo.close();
 }
