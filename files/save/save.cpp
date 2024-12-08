@@ -218,3 +218,11 @@ void losePoint() {
 	}
 	saveAccounts(accounts);
 }
+
+// Возвращает имя игрока: Если указать 1 - вернёт имя главного, если 2 - второго
+std::string playerName(int mode) {
+	std::vector<Account> accounts;
+	importAccounts(accounts);
+	for (auto account : accounts)
+		if (account.active == mode) return account.name;
+}
