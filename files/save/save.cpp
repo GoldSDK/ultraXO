@@ -6,10 +6,10 @@
 #include <sstream>
 #include <vector>
 
-//Функция позволяющая пользователю выбрать одну опцию (число) из нескольких с защийтой от дурака
-//Исспользуется как-то так:
-//int userChoise - переменная хранящая выбор пользователя
-//userChoise = chooseOption(количество_опций, "Выберите опцию:\n1 - опция1\n2 - опция2...", "текст_ошибки_при_вводе_не_числа", "текст_ошибки_при_вводе_числа_вне_диапазона");
+// Функция позволяющая пользователю выбрать одну опцию (число) из нескольких с защийтой от дурака
+// Исспользуется как-то так:
+// int userChoise - переменная хранящая выбор пользователя
+// userChoise = chooseOption(количество_опций, "Выберите опцию:\n1 - опция1\n2 - опция2...", "текст_ошибки_при_вводе_не_числа", "текст_ошибки_при_вводе_числа_вне_диапазона");
 int chooseOption(int optionsAmount, std::string message, std::string error1, std::string error2) {
 	int ans;
 	bool err;
@@ -111,7 +111,7 @@ void importAccounts(std::vector<Account>& accounts) {
 void saveAccounts(std::vector<Account>& accounts) {
 	std::ofstream saveTo("account.txt");
 	for (auto account : accounts) {
-		saveTo << myReplace(account.name, " ", "|") << " " << account.wins << " " << account.loses << " " << account.active << "\n";
+		saveTo << segment(myReplace(account.name, " ", "|"), 0, account.name.size() - 1) << " " << account.wins << " " << account.loses << " " << account.active << "\n";
 	}
 	saveTo.close();
 }
@@ -144,6 +144,15 @@ void resetActivity() {
 	saveAccounts(accounts);
 }
 
+void resetActivity(int mode) {
+	std::vector<Account> accounts;
+	importAccounts(accounts);
+	for (auto& account : accounts)
+		if (account.active == mode)
+			account.active = 0;
+	saveAccounts(accounts);
+}
+
 void createAccount(std::string userName) {
 	std::vector<Account> accounts;
 	importAccounts(accounts);
@@ -154,4 +163,35 @@ void createAccount(std::string userName) {
 	newAccount.active = 0;
 	accounts.push_back(newAccount);
 	saveAccounts(accounts);
+}
+
+// Я пока не разобрался с кодировкой, поэтому на английском
+std::string enterName() {
+	std::string name;
+	do
+	{
+		std::cout << "Enter your name:"; //Введите имя:
+		getline(std::cin, name);
+		if (name == "") std::cout << "Error: Name can't be epty!\n"; //Ошибка: Имя должно содержать символы!\n
+		else if (name == "bot") std::cout << "Error: Name can't be \"bot\"!\n"; //Ошибка: Имя не может быть \"bot\"!\n
+	} while (name == "" || name == "bot");
+	return name;
+}
+
+// Эта функция проверяет, есть ли у пользователя "аккаунт", и создает новый если нет
+// В параметрах указывается 1 - для основного игрока и 2 - для второго
+void checkAccount(int mode) {
+	std::string name;
+	resetActivity(mode);
+	name = enterName();
+
+	if (accountExists(name))
+	{
+		setActivity(name, mode);
+	}
+	else
+	{
+		createAccount(name);
+		setActivity(name, mode);
+	}
 }
