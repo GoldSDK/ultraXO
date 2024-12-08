@@ -111,3 +111,11 @@ void saveAccounts(std::vector<Account>& accounts) {
 	}
 	saveTo.close();
 }
+
+bool accountExists(std::string userName) {
+	std::vector<Account> accounts;
+	importAccounts(accounts);
+	for (const auto account : accounts)
+		if (account.name == userName) return true;
+	return false;
+}
