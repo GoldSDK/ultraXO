@@ -132,3 +132,14 @@ void setActivity(std::string userName, int mode) {
 	saveAccounts(accounts);
 }
 
+void createAccount(std::string userName) {
+	std::vector<Account> accounts;
+	importAccounts(accounts);
+	Account newAccount;
+	newAccount.name = userName;
+	newAccount.wins = 0;
+	newAccount.loses = 0;
+	newAccount.active = 0;
+	accounts.push_back(newAccount);
+	saveAccounts(accounts);
+}
