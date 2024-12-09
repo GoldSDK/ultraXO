@@ -4,7 +4,7 @@
 // заголовки находятся строго в files/game/game.h и files/save/save.h
 int main() {
 
-	CheckAccount(); // CheckAccount() это void, находящийся в save/save.cpp
+	// CheckAccount() это void, находящийся в save/save.cpp
 	// эта функция проверяет, есть ли у пользователя "аккаунт", и создает новый если нет.
 	// он делает это, считывая файл save/account.txt, если он пуст или его нет, то он просит игрока ввести имя и сохраняет аккаунт
 	// к аккаунту привязано количество побед и поражений	
@@ -18,9 +18,14 @@ int main() {
 	}
 	switch(modeChoice) {
 		case 1:
+			for (int i = 1; i < 3; i++) {
+				std::cout << "Игрок " << i << ":" << std::endl;
+				checkAccount(i);
+			}
 			vsPlayer();
 			break;
 		case 2:
+			checkAccount(1);
 			vsBot();
 			break;	
 	}
