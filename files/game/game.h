@@ -1,0 +1,2 @@
+void vsPlayer();
+void vsBot();
