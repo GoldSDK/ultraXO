@@ -166,7 +166,7 @@ void createAccount(std::string userName) {
 }
 
 // Я пока не разобрался с кодировкой, поэтому на английском
-std::string enterName() {
+std::string enterNameEn() {
 	std::string name;
 	do
 	{
@@ -174,6 +174,18 @@ std::string enterName() {
 		getline(std::cin, name);
 		if (name == "") std::cout << "Error: Name can't be epty!\n"; //Ошибка: Имя должно содержать символы!\n
 		else if (name == "bot") std::cout << "Error: Name can't be \"bot\"!\n"; //Ошибка: Имя не может быть \"bot\"!\n
+	} while (name == "" || name == "bot");
+	return name;
+}
+
+std::string enterName() {
+	std::string name;
+	do
+	{
+		std::cout << "Введите имя:";
+		getline(std::cin, name);
+		if (name == "") std::cout << "Ошибка: Имя должно содержать символы!\n";
+		else if (name == "bot") std::cout << "Ошибка: Имя не может быть \"bot\"!\n";
 	} while (name == "" || name == "bot");
 	return name;
 }
